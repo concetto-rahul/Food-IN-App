@@ -8,9 +8,10 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import Home from './components/Home';
 import ItemDetail from './components/ItemDetail';
-import Profile from './components/Profile';
 import Travel from './components/travel';
 import TravelDetail from './components/travel/Detail';
+import Account from './components/account';
+import Profile from './components/account/Profile';
 
 import travelColors from './assets/colors/travel';
 
@@ -51,6 +52,14 @@ function TravelStackScreen() {
   );
 }
 
+function AccountStackScreen() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Account" component={Account} />
+      <Stack.Screen name="Profile" component={Profile} />
+    </Stack.Navigator>
+  );
+}
 
 function App() {
   return (
@@ -64,7 +73,7 @@ function App() {
               iconName = 'home';
             } else if (route.name === 'TravelStackScreen') {
               iconName = 'wallet-travel';
-            } else if (route.name === 'Profile') {
+            } else if (route.name === 'AccountStackScreen') {
               iconName = 'account';
             }
 
@@ -82,18 +91,18 @@ function App() {
           tabBarStyle: styles.tabBar,
         })}>
         <Tab.Screen
-          name="TravelStackScreen"
-          component={TravelStackScreen}
-          options={{headerShown: false}}
-        />
-        <Tab.Screen
           name="HomeStackScreen"
           component={HomeStackScreen}
           options={{headerShown: false}}
         />
         <Tab.Screen
-          name="Profile"
-          component={Profile}
+          name="TravelStackScreen"
+          component={TravelStackScreen}
+          options={{headerShown: false}}
+        />
+        <Tab.Screen
+          name="AccountStackScreen"
+          component={AccountStackScreen}
           options={{headerShown: false}}
         />
       </Tab.Navigator>
