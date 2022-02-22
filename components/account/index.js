@@ -1,65 +1,70 @@
-import React, {useLayoutEffect} from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
-import Feather from 'react-native-vector-icons/Feather';
-
-import colors from '../../assets/colors/travel';
+import React, {useEffect, useState} from 'react';
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 import Login from './Login';
 import Dashborad from './Dashboard';
-
-const HeaderRight = ({onPressSearch, onPressSettings}) => {
-  return (
-    <>
-      <TouchableOpacity onPress={() => onPressSearch()}>
-        <Feather
-          name="search"
-          size={24}
-          color={colors.black}
-          style={styles.headerSearch}
-        />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => onPressSettings()}>
-        <Feather
-          name="settings"
-          size={24}
-          color={colors.black}
-          style={styles.headerSettings}
-        />
-      </TouchableOpacity>
-    </>
-  );
-};
+import Signup from './Signup';
+import {auth} from '../../config/firebase';
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 const Account = ({navigation}) => {
-  const onPressSearch = () => {
-    return navigation.navigate('Profile');
-  };
-  const onPressSettings = () => {
-    return navigation.navigate('Profile');
+  const [isRegister, setIsRegister] = useState(false);
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const updateUserData = async () => {
+      await onAuthStateChanged(auth, (currentUser) => {
+        setUserData(currentUser);
+      });
+    };
+    updateUserData();
+  }, []);
+
+  const handelSignup = async ({email, password}) => {
+    try {
+      const resUserData = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+    } catch (error) {
+      console.log('handelSignup error', error.message);
+      alert('Wrong data pass.');
+    }
   };
 
-  const userData = null;
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      title: userData ? 'My Account' : 'Login',
-      headerRight: props =>
-        userData && (
-          <HeaderRight
-            {...props}
-            onPressSearch={onPressSearch}
-            onPressSettings={onPressSettings}
-          />
-        ),
-    });
-  }, [navigation]);
+  const handelLogin = async ({email, password}) => {
+    try {
+      const resUserData = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      console, log('handelLogin resUserData', resUserData);
+    } catch (error) {
+      console.log('handelSignup error', error);
+      alert('Invalid login credentials.');
+    }
+  };
 
-  return userData ? <Dashborad /> : <Login />;
+  return userData ? (
+    <Dashborad navigation={navigation} />
+  ) : isRegister ? (
+    <Signup
+      setIsRegister={setIsRegister}
+      handelSignup={handelSignup}
+      navigation={navigation}
+    />
+  ) : (
+    <Login
+      setIsRegister={setIsRegister}
+      navigation={navigation}
+      handelLogin={handelLogin}
+    />
+  );
 };
-
-const styles = StyleSheet.create({
-  headerSearch: {
-    marginRight: 15,
-  },
-  headerSettings: {},
-});
 
 export default Account;

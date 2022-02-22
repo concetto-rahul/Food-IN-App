@@ -1,4 +1,4 @@
-import React, {useState, useLayoutEffect} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {
   KeyboardAvoidingView,
   View,
@@ -7,60 +7,54 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+
 import colors from '../../assets/colors/travel';
 
-const Login = ({setIsRegister, navigation, handelLogin}) => {
+const Signup = ({setIsRegister, navigation, handelSignup}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: 'Login',
-      headerRight: null,
+      title: 'Signup',
     });
   }, [navigation]);
 
-  const submitLoginData = () => {
-    handelLogin({email, password});
+  const submitSignupData = () => {
+    handelSignup({email, password});
   };
 
   return (
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.loginFormContainer}>
-        <Text style={styles.title}>Welcome Back</Text>
-        <Text style={styles.subTitle}>Sign in to your account</Text>
+        <Text style={styles.title}>Register Now</Text>
+        <Text style={styles.subTitle}>Please fill all required fields.</Text>
         <View style={styles.loginFormWrapper}>
           <TextInput
             placeholder="Email"
             value={email}
-            onChangeText={setEmail}
+            onChangeText={text => setEmail(text)}
             style={styles.emailText}
             underlineColorAndroid="transparent"
-          />
-          <TextInput
-            placeholder="Email"
-            value={email}
-            onChangeText={setEmail}
-            style={styles.emailText}
-            underlineColorAndroid="transparent"
+            autoCompleteType="off"
           />
           <TextInput
             placeholder="Password"
             value={password}
-            onChangeText={setPassword}
+            onChangeText={text => setPassword(text)}
             style={styles.passwordText}
             underlineColorAndroid="transparent"
+            autoCompleteType="off"
             secureTextEntry
           />
-          <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
 
           <TouchableOpacity
-            onPress={() => submitLoginData()}
+            onPress={() => submitSignupData()}
             style={styles.loginButton}>
-            <Text style={styles.loginButtonText}>Login</Text>
+            <Text style={styles.loginButtonText}>Signup</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => setIsRegister(true)}>
-            <Text style={styles.signUpText}>Signup</Text>
+          <TouchableOpacity onPress={() => setIsRegister(false)}>
+            <Text style={styles.signUpText}>Login</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -130,4 +124,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-export default Login;
+export default Signup;

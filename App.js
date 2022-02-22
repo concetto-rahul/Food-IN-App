@@ -6,14 +6,15 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
+import travelColors from './assets/colors/travel';
+
 import Home from './components/Home';
 import ItemDetail from './components/ItemDetail';
 import Travel from './components/travel';
 import TravelDetail from './components/travel/Detail';
 import Account from './components/account';
 import Profile from './components/account/Profile';
-
-import travelColors from './assets/colors/travel';
+import Setting from './components/account/Setting';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -57,6 +58,7 @@ function AccountStackScreen() {
     <Stack.Navigator>
       <Stack.Screen name="Account" component={Account} />
       <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Settings" component={Setting} />
     </Stack.Navigator>
   );
 }
