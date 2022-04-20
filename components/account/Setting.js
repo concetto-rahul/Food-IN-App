@@ -8,20 +8,20 @@ import {
   Dimensions,
   Image,
 } from 'react-native';
-import colors from '../../assets/colors/travel';
-import {auth} from '../../config/firebase';
-import {signOut} from 'firebase/auth';
-
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+// import auth from '@react-native-firebase/auth';
+
+import colors from '../../assets/colors/travel';
 
 const screenHeight = Dimensions.get('window').height;
 
 const Setting = ({navigation}) => {
-  const userData = auth.currentUser;
+  // const userData = auth().currentUser;
+  const userData = null;
   const handelSignout = async () => {
-    await signOut(auth);
-    navigation.navigate('Account');
+    // await auth().signOut();
+    // navigation.navigate('Account');
   };
 
   return (

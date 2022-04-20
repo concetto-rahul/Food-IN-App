@@ -5,6 +5,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import SplashScreen from 'react-native-splash-screen';
 
 import travelColors from './assets/colors/travel';
 
@@ -64,6 +65,9 @@ function AccountStackScreen() {
 }
 
 function App() {
+  React.useEffect(() => {
+    SplashScreen.hide()
+  }, []);
   return (
     <NavigationContainer>
       <Tab.Navigator

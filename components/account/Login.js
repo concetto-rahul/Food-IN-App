@@ -38,13 +38,6 @@ const Login = ({setIsRegister, navigation, handelLogin}) => {
             underlineColorAndroid="transparent"
           />
           <TextInput
-            placeholder="Email"
-            value={email}
-            onChangeText={setEmail}
-            style={styles.emailText}
-            underlineColorAndroid="transparent"
-          />
-          <TextInput
             placeholder="Password"
             value={password}
             onChangeText={setPassword}

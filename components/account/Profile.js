@@ -9,16 +9,17 @@ import {
   Image,
   TextInput,
 } from 'react-native';
-import colors from '../../assets/colors/travel';
-import {auth} from '../../config/firebase';
-
+// import auth from '@react-native-firebase/auth';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+
+import colors from '../../assets/colors/travel';
 
 const screenHeight = Dimensions.get('window').height;
 
 const Profile = () => {
   const [name, setName] = useState('Rahul Patil');
-  const userData = auth.currentUser;
+  // const userData = auth().currentUser;
+  const userData = null;
   const handelFormData = async () => {};
 
   return (
