@@ -9,7 +9,7 @@ import {
   Image,
   TextInput,
 } from 'react-native';
-// import auth from '@react-native-firebase/auth';
+import auth from '@react-native-firebase/auth';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import colors from '../../assets/colors/travel';
@@ -18,8 +18,7 @@ const screenHeight = Dimensions.get('window').height;
 
 const Profile = () => {
   const [name, setName] = useState('Rahul Patil');
-  // const userData = auth().currentUser;
-  const userData = null;
+  const userData = auth().currentUser;
   const handelFormData = async () => {};
 
   return (

@@ -1,7 +1,7 @@
 import React, {useLayoutEffect} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
-// import auth from '@react-native-firebase/auth';
+import auth from '@react-native-firebase/auth';
 
 import colors from '../../assets/colors/travel';
 
@@ -28,8 +28,7 @@ const HeaderRight = ({onPressSearch, onPressSettings}) => {
   );
 };
 const Dashboard = ({navigation}) => {
-  // const userData = auth().currentUser;
-  const userData = null;
+  const userData = auth().currentUser;
   useLayoutEffect(() => {
     navigation.setOptions({
       title: 'My Account',
